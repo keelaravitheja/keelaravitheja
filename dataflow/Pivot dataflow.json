@@ -1,0 +1,60 @@
+{
+	"name": "Pivot dataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "keelaemployeedataset",
+						"type": "DatasetReference"
+					},
+					"name": "Employees"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "keelaoutputdataset",
+						"type": "DatasetReference"
+					},
+					"name": "totalemployees"
+				}
+			],
+			"transformations": [
+				{
+					"name": "pivotemp"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          EmployeID as short,",
+				"          Name as string,",
+				"          Country as string,",
+				"          Department as short,",
+				"          Gender as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Employees",
+				"Employees pivot(groupBy(Department),",
+				"     pivotBy(Gender),",
+				"     gender = count(EmployeID),",
+				"     columnNaming: 'Total_$N$V_Employees',",
+				"     lateral: true) ~> pivotemp",
+				"pivotemp sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          EmployeID as string,",
+				"          Name as string,",
+				"          Country as string,",
+				"          Department as string",
+				"     ),",
+				"     partitionFileNames:['TotalPivotemployees.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> totalemployees"
+			]
+		}
+	}
+}

@@ -1,0 +1,76 @@
+{
+	"name": "Totalempbydept",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Employeedataset",
+						"type": "DatasetReference"
+					},
+					"name": "employee"
+				},
+				{
+					"dataset": {
+						"referenceName": "DepartmentDatadataset",
+						"type": "DatasetReference"
+					},
+					"name": "Departments"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "outputdataset",
+						"type": "DatasetReference"
+					},
+					"name": "sink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "aggregateondept"
+				},
+				{
+					"name": "join1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          EmployeID as string,",
+				"          Name as string,",
+				"          Country as string,",
+				"          Department as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> employee",
+				"source(output(",
+				"          DepartmentID as string,",
+				"          DepartmentName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Departments",
+				"employee aggregate(groupBy(Department),",
+				"     Totalemployees = count(EmployeID)) ~> aggregateondept",
+				"aggregateondept, Departments join(Department == DepartmentID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['totalEmpbydeptlatest.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          DepartmentName,",
+				"          Totalemployees",
+				"     ),",
+				"     partitionBy('hash', 1)) ~> sink"
+			]
+		}
+	}
+}

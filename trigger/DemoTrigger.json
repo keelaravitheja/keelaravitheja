@@ -1,0 +1,31 @@
+{
+	"name": "DemoTrigger",
+	"properties": {
+		"description": "Daily schedule trigger",
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline1",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2025-01-31T14:05:00",
+				"endTime": "2025-02-10T14:10:00",
+				"timeZone": "India Standard Time",
+				"schedule": {
+					"minutes": [
+						10
+					]
+				}
+			}
+		}
+	}
+}

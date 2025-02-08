@@ -1,0 +1,9 @@
+{
+	"name": "keelademoADF",
+	"location": "southindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "07664969-6f0e-4965-8c04-1491c0627c07",
+		"tenantId": "713bb3df-cf82-4851-9c92-3149ca79ac54"
+	}
+}

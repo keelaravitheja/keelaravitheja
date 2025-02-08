@@ -1,0 +1,30 @@
+{
+	"name": "eventtrigger",
+	"properties": {
+		"description": "event trigger",
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline1",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"filepath": "triggerBody().filepath",
+					"filename": "triggerBody().filename"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/adfdemo/blobs/input/",
+			"blobPathEndsWith": ".txt",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/1268a189-3299-49db-a72f-4e9cd85d409a/resourceGroups/keela_Testenvironment/providers/Microsoft.Storage/storageAccounts/storagedemokeela",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

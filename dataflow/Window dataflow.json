@@ -1,0 +1,60 @@
+{
+	"name": "Window dataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "employee1",
+						"type": "DatasetReference"
+					},
+					"name": "employe"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "keelaoutputdataset",
+						"type": "DatasetReference"
+					},
+					"name": "Windowsink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "window1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ID as integer,",
+				"          Name as string,",
+				"          Gender as string,",
+				"          country as string,",
+				"          Salary as integer,",
+				"          Department as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> employe",
+				"employe window(over(Department),",
+				"     desc(Salary, true),",
+				"     AvgSalary = avg(Salary),",
+				"          DenseRank = denseRank()) ~> window1",
+				"window1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          EmployeID as string,",
+				"          Name as string,",
+				"          Country as string,",
+				"          Department as string",
+				"     ),",
+				"     partitionFileNames:['Windowemployees.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> Windowsink"
+			]
+		}
+	}
+}

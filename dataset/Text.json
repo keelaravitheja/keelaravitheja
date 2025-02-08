@@ -1,0 +1,30 @@
+{
+	"name": "Text",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedservicestoragedemo keela",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "text.csv",
+				"folderPath": "input",
+				"container": "keelaadfdemo"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "po vender Apple Mango",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

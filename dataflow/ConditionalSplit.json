@@ -1,0 +1,78 @@
+{
+	"name": "ConditionalSplit",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Employeedataset",
+						"type": "DatasetReference"
+					},
+					"name": "employeedataset"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "outputdataset",
+						"type": "DatasetReference"
+					},
+					"name": "HREmployees"
+				},
+				{
+					"dataset": {
+						"referenceName": "outputdataset",
+						"type": "DatasetReference"
+					},
+					"name": "ITEmployees"
+				},
+				{
+					"dataset": {
+						"referenceName": "outputdataset",
+						"type": "DatasetReference"
+					},
+					"name": "PayrollEmployees"
+				}
+			],
+			"transformations": [
+				{
+					"name": "splitbasedonDep"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          EmployeID as string,",
+				"          Name as string,",
+				"          Country as string,",
+				"          Department as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> employeedataset",
+				"employeedataset split(equals(Department, '1'),",
+				"     equals(Department, '2'),",
+				"     equals(Department, '3'),",
+				"     disjoint: false) ~> splitbasedonDep@(HRemployees, ITemployees, PayrollEmployees)",
+				"splitbasedonDep@HRemployees sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['HREmployees.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> HREmployees",
+				"splitbasedonDep@ITemployees sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['IT Employee.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> ITEmployees",
+				"splitbasedonDep@PayrollEmployees sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['PayrollEmployees.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> PayrollEmployees"
+			]
+		}
+	}
+}

@@ -1,0 +1,51 @@
+{
+	"name": "DerivedColumntransformtion",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Employeedataset",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "outputdataset",
+						"type": "DatasetReference"
+					},
+					"name": "Newcountrylist"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          EmployeID as short,",
+				"          Name as string,",
+				"          Country as string,",
+				"          Department as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     limit: 100,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 derive(Country = upper(Country),",
+				"          NewCountry = iif(isNull(Country), 'Unknow', upper(Country))) ~> derivedColumn1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['NewCountrylist'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> Newcountrylist"
+			]
+		}
+	}
+}

@@ -1,0 +1,46 @@
+{
+	"name": "Paramerisedpipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "Parameterised dataflow2",
+						"type": "DataFlowReference",
+						"parameters": {
+							"Department": {
+								"value": "'@{pipeline().parameters.dept}'",
+								"type": "Expression"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"parameters": {
+			"dept": {
+				"type": "string",
+				"defaultValue": "IT"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-02-04T18:49:08Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
