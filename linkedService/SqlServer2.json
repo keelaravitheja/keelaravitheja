@@ -4,12 +4,6 @@
 		"parameters": {
 			"dbname": {
 				"type": "string"
-			},
-			"username": {
-				"type": "string"
-			},
-			"password": {
-				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -20,7 +14,7 @@
 			"encrypt": "mandatory",
 			"trustServerCertificate": true,
 			"authenticationType": "SQL",
-			"userName": "@{linkedService().username}",
+			"userName": "ka",
 			"password": {
 				"type": "AzureKeyVaultSecret",
 				"store": {
