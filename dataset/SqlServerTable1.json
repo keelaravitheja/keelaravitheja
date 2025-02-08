@@ -38,7 +38,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Company_Destination"
+			"table": "tblemploees1"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
