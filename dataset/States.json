@@ -1,0 +1,36 @@
+{
+	"name": "States",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Source",
+				"container": "adlsdatastorage"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "NO",
+				"type": "String"
+			},
+			{
+				"name": "PERSON",
+				"type": "String"
+			},
+			{
+				"name": "GENDER",
+				"type": "String"
+			}
+		]
+	}
+}
