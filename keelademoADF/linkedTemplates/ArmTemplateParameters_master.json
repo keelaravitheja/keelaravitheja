@@ -77,6 +77,9 @@
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://adlskeelademo.dfs.core.windows.net/"
 		},
+		"RestService2_properties_typeProperties_url": {
+			"value": "https://pokeapi.co/api/v2/pokemon?limit=20&offset={offset}"
+		},
 		"containerUri": {
 			"value": ""
 		},
