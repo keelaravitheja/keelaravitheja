@@ -1,0 +1,87 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "keelademoADF"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"SQL Storage_connectionString": {
+			"value": ""
+		},
+		"SqlServer_password": {
+			"value": ""
+		},
+		"linkedservice_sqlserver_password": {
+			"value": ""
+		},
+		"linkedservicestoragedemo keela_connectionString": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"SqlServer_properties_typeProperties_server": {
+			"value": "DESKTOP-069SH83\\KEELA"
+		},
+		"SqlServer_properties_typeProperties_database": {
+			"value": "Practice"
+		},
+		"SqlServer_properties_typeProperties_userName": {
+			"value": "sa"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"value": "@{linkedService().servername}"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"value": "@{linkedService().dbName}"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"value": "@{linkedService().username}"
+		},
+		"SqlServer2_properties_typeProperties_server": {
+			"value": "DESKTOP-069SH83\\KEELA"
+		},
+		"SqlServer2_properties_typeProperties_database": {
+			"value": "@{linkedService().dbname}"
+		},
+		"SqlServer2_properties_typeProperties_userName": {
+			"value": "ka"
+		},
+		"Sqlkeyvalut_properties_typeProperties_baseUrl": {
+			"value": "https://KV-TS-SQL.vault.azure.net/"
+		},
+		"linkedservice_sqlserver_properties_typeProperties_server": {
+			"value": "DESKTOP-069SH83\\KEELA"
+		},
+		"linkedservice_sqlserver_properties_typeProperties_database": {
+			"value": "@{linkedService().dbname}"
+		},
+		"linkedservice_sqlserver_properties_typeProperties_userName": {
+			"value": "sa"
+		},
+		"eventtrigger_properties_pipeline1_parameters_filepath": {
+			"value": "triggerBody().filepath"
+		},
+		"eventtrigger_properties_pipeline1_parameters_filename": {
+			"value": "triggerBody().filename"
+		},
+		"eventtrigger_properties_typeProperties_scope": {
+			"value": "/subscriptions/1268a189-3299-49db-a72f-4e9cd85d409a/resourceGroups/keela_Testenvironment/providers/Microsoft.Storage/storageAccounts/storagedemokeela"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"value": "https://pokeapi.co/api/v2/pokemon?offset=20&limit=20%22"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://adlskeelademo.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

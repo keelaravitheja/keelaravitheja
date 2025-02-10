@@ -1,0 +1,290 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "keelademoADF"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		},
+		"SQL Storage_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SQL Storage'"
+		},
+		"SqlServer_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer'"
+		},
+		"linkedservice_sqlserver_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'linkedservice_sqlserver'"
+		},
+		"linkedservicestoragedemo keela_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedservicestoragedemo keela'"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"SqlServer_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "DESKTOP-069SH83\\KEELA"
+		},
+		"SqlServer_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Practice"
+		},
+		"SqlServer_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "@{linkedService().servername}"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "@{linkedService().dbName}"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "@{linkedService().username}"
+		},
+		"SqlServer2_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "DESKTOP-069SH83\\KEELA"
+		},
+		"SqlServer2_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "@{linkedService().dbname}"
+		},
+		"SqlServer2_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "ka"
+		},
+		"Sqlkeyvalut_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://KV-TS-SQL.vault.azure.net/"
+		},
+		"linkedservice_sqlserver_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "DESKTOP-069SH83\\KEELA"
+		},
+		"linkedservice_sqlserver_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "@{linkedService().dbname}"
+		},
+		"linkedservice_sqlserver_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"eventtrigger_properties_pipeline1_parameters_filepath": {
+			"type": "string",
+			"defaultValue": "triggerBody().filepath"
+		},
+		"eventtrigger_properties_pipeline1_parameters_filename": {
+			"type": "string",
+			"defaultValue": "triggerBody().filename"
+		},
+		"eventtrigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/1268a189-3299-49db-a72f-4e9cd85d409a/resourceGroups/keela_Testenvironment/providers/Microsoft.Storage/storageAccounts/storagedemokeela"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://pokeapi.co/api/v2/pokemon?offset=20&limit=20%22"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlskeelademo.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "keelademoADF_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage1_connectionString": {
+						"value": "[parameters('AzureBlobStorage1_connectionString')]"
+					},
+					"SQL Storage_connectionString": {
+						"value": "[parameters('SQL Storage_connectionString')]"
+					},
+					"linkedservicestoragedemo keela_connectionString": {
+						"value": "[parameters('linkedservicestoragedemo keela_connectionString')]"
+					},
+					"AzureDataLakeStorage1_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					},
+					"SqlServer1_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_server')]"
+					},
+					"SqlServer1_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_database')]"
+					},
+					"SqlServer1_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
+					},
+					"Sqlkeyvalut_properties_typeProperties_baseUrl": {
+						"value": "[parameters('Sqlkeyvalut_properties_typeProperties_baseUrl')]"
+					},
+					"RestService1_properties_typeProperties_url": {
+						"value": "[parameters('RestService1_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "keelademoADF_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"SqlServer_password": {
+						"value": "[parameters('SqlServer_password')]"
+					},
+					"linkedservice_sqlserver_password": {
+						"value": "[parameters('linkedservice_sqlserver_password')]"
+					},
+					"SqlServer_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer_properties_typeProperties_server')]"
+					},
+					"SqlServer_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer_properties_typeProperties_database')]"
+					},
+					"SqlServer_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer_properties_typeProperties_userName')]"
+					},
+					"SqlServer2_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer2_properties_typeProperties_server')]"
+					},
+					"SqlServer2_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer2_properties_typeProperties_database')]"
+					},
+					"SqlServer2_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer2_properties_typeProperties_userName')]"
+					},
+					"linkedservice_sqlserver_properties_typeProperties_server": {
+						"value": "[parameters('linkedservice_sqlserver_properties_typeProperties_server')]"
+					},
+					"linkedservice_sqlserver_properties_typeProperties_database": {
+						"value": "[parameters('linkedservice_sqlserver_properties_typeProperties_database')]"
+					},
+					"linkedservice_sqlserver_properties_typeProperties_userName": {
+						"value": "[parameters('linkedservice_sqlserver_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'keelademoADF_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "keelademoADF_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'keelademoADF_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "keelademoADF_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'keelademoADF_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "keelademoADF_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"eventtrigger_properties_pipeline1_parameters_filepath": {
+						"value": "[parameters('eventtrigger_properties_pipeline1_parameters_filepath')]"
+					},
+					"eventtrigger_properties_pipeline1_parameters_filename": {
+						"value": "[parameters('eventtrigger_properties_pipeline1_parameters_filename')]"
+					},
+					"eventtrigger_properties_typeProperties_scope": {
+						"value": "[parameters('eventtrigger_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'keelademoADF_ArmTemplate_3')]"
+			]
+		}
+	]
+}
