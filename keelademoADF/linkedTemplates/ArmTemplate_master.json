@@ -15,6 +15,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
 		},
+		"AzureSqlDatabase1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase1'"
+		},
+		"AzureSqlDatabase2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase2'"
+		},
 		"SQL Storage_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SQL Storage'"
@@ -31,13 +39,37 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'linkedservicestoragedemo keela'"
 		},
-		"AzureSqlDatabase1_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'AzureSqlDatabase1'"
-		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlskeelademo.dfs.core.windows.net/"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://KV-Azure-EV.vault.azure.net/"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "keelasqldatabase.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Azure demo"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "keelasqlserverdemo"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "keelasqldatabase.database.windows.net"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sampleDB"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "keelasqlserverdemo"
 		},
 		"RestService1_properties_typeProperties_url": {
 			"type": "string",
@@ -111,18 +143,6 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/1268a189-3299-49db-a72f-4e9cd85d409a/resourceGroups/keela_Testenvironment/providers/Microsoft.Storage/storageAccounts/storagedemokeela"
 		},
-		"AzureSqlDatabase1_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "keelasqldatabase.database.windows.net"
-		},
-		"AzureSqlDatabase1_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "Azure demo"
-		},
-		"AzureSqlDatabase1_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "keelasqlserverdemo"
-		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -156,17 +176,41 @@
 					"AzureDataLakeStorage1_accountKey": {
 						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
 					},
+					"AzureSqlDatabase1_password": {
+						"value": "[parameters('AzureSqlDatabase1_password')]"
+					},
+					"AzureSqlDatabase2_password": {
+						"value": "[parameters('AzureSqlDatabase2_password')]"
+					},
 					"SQL Storage_connectionString": {
 						"value": "[parameters('SQL Storage_connectionString')]"
 					},
 					"linkedservicestoragedemo keela_connectionString": {
 						"value": "[parameters('linkedservicestoragedemo keela_connectionString')]"
 					},
-					"AzureSqlDatabase1_password": {
-						"value": "[parameters('AzureSqlDatabase1_password')]"
-					},
 					"AzureDataLakeStorage1_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_userName')]"
+					},
+					"AzureSqlDatabase2_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase2_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase2_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase2_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase2_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase2_properties_typeProperties_userName')]"
 					},
 					"RestService1_properties_typeProperties_url": {
 						"value": "[parameters('RestService1_properties_typeProperties_url')]"
@@ -185,15 +229,6 @@
 					},
 					"Sqlkeyvalut_properties_typeProperties_baseUrl": {
 						"value": "[parameters('Sqlkeyvalut_properties_typeProperties_baseUrl')]"
-					},
-					"AzureSqlDatabase1_properties_typeProperties_server": {
-						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
-					},
-					"AzureSqlDatabase1_properties_typeProperties_database": {
-						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]"
-					},
-					"AzureSqlDatabase1_properties_typeProperties_userName": {
-						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -212,27 +247,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"SqlServer_password": {
-						"value": "[parameters('SqlServer_password')]"
-					},
-					"SqlServer_properties_typeProperties_server": {
-						"value": "[parameters('SqlServer_properties_typeProperties_server')]"
-					},
-					"SqlServer_properties_typeProperties_database": {
-						"value": "[parameters('SqlServer_properties_typeProperties_database')]"
-					},
-					"SqlServer_properties_typeProperties_userName": {
-						"value": "[parameters('SqlServer_properties_typeProperties_userName')]"
-					},
-					"SqlServer2_properties_typeProperties_server": {
-						"value": "[parameters('SqlServer2_properties_typeProperties_server')]"
-					},
-					"SqlServer2_properties_typeProperties_database": {
-						"value": "[parameters('SqlServer2_properties_typeProperties_database')]"
-					},
-					"SqlServer2_properties_typeProperties_userName": {
-						"value": "[parameters('SqlServer2_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -254,8 +268,29 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"SqlServer_password": {
+						"value": "[parameters('SqlServer_password')]"
+					},
 					"linkedservice_sqlserver_password": {
 						"value": "[parameters('linkedservice_sqlserver_password')]"
+					},
+					"SqlServer_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer_properties_typeProperties_server')]"
+					},
+					"SqlServer_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer_properties_typeProperties_database')]"
+					},
+					"SqlServer_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer_properties_typeProperties_userName')]"
+					},
+					"SqlServer2_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer2_properties_typeProperties_server')]"
+					},
+					"SqlServer2_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer2_properties_typeProperties_database')]"
+					},
+					"SqlServer2_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer2_properties_typeProperties_userName')]"
 					},
 					"linkedservice_sqlserver_properties_typeProperties_server": {
 						"value": "[parameters('linkedservice_sqlserver_properties_typeProperties_server')]"
