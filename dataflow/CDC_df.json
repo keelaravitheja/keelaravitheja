@@ -18,7 +18,7 @@
 						"referenceName": "citizenDW",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "citizensink"
 				}
 			],
 			"transformations": [],
@@ -48,7 +48,11 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Id,",
+				"          Name = name",
+				"     )) ~> citizensink"
 			]
 		}
 	}
