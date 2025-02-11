@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
 		"SQL Storage_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'SQL Storage'"
@@ -27,9 +31,21 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'linkedservicestoragedemo keela'"
 		},
-		"AzureDataLakeStorage1_accountKey": {
+		"AzureSqlDatabase1_password": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase1'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlskeelademo.dfs.core.windows.net/"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://pokeapi.co/api/v2/pokemon?offset=20&limit=20%22"
+		},
+		"RestService2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://pokeapi.co/api/v2/pokemon?limit=20&offset={offset}"
 		},
 		"SqlServer_properties_typeProperties_server": {
 			"type": "string",
@@ -95,17 +111,17 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/1268a189-3299-49db-a72f-4e9cd85d409a/resourceGroups/keela_Testenvironment/providers/Microsoft.Storage/storageAccounts/storagedemokeela"
 		},
-		"RestService1_properties_typeProperties_url": {
+		"AzureSqlDatabase1_properties_typeProperties_server": {
 			"type": "string",
-			"defaultValue": "https://pokeapi.co/api/v2/pokemon?offset=20&limit=20%22"
+			"defaultValue": "keelasqldatabase.database.windows.net"
 		},
-		"AzureDataLakeStorage1_properties_typeProperties_url": {
+		"AzureSqlDatabase1_properties_typeProperties_database": {
 			"type": "string",
-			"defaultValue": "https://adlskeelademo.dfs.core.windows.net/"
+			"defaultValue": "Azure demo"
 		},
-		"RestService2_properties_typeProperties_url": {
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
 			"type": "string",
-			"defaultValue": "https://pokeapi.co/api/v2/pokemon?limit=20&offset={offset}"
+			"defaultValue": "keelasqlserverdemo"
 		},
 		"containerUri": {
 			"type": "string",
@@ -137,14 +153,26 @@
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
+					"AzureDataLakeStorage1_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					},
 					"SQL Storage_connectionString": {
 						"value": "[parameters('SQL Storage_connectionString')]"
 					},
 					"linkedservicestoragedemo keela_connectionString": {
 						"value": "[parameters('linkedservicestoragedemo keela_connectionString')]"
 					},
-					"AzureDataLakeStorage1_accountKey": {
-						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					"AzureSqlDatabase1_password": {
+						"value": "[parameters('AzureSqlDatabase1_password')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"RestService1_properties_typeProperties_url": {
+						"value": "[parameters('RestService1_properties_typeProperties_url')]"
+					},
+					"RestService2_properties_typeProperties_url": {
+						"value": "[parameters('RestService2_properties_typeProperties_url')]"
 					},
 					"SqlServer1_properties_typeProperties_server": {
 						"value": "[parameters('SqlServer1_properties_typeProperties_server')]"
@@ -158,14 +186,14 @@
 					"Sqlkeyvalut_properties_typeProperties_baseUrl": {
 						"value": "[parameters('Sqlkeyvalut_properties_typeProperties_baseUrl')]"
 					},
-					"RestService1_properties_typeProperties_url": {
-						"value": "[parameters('RestService1_properties_typeProperties_url')]"
+					"AzureSqlDatabase1_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
 					},
-					"AzureDataLakeStorage1_properties_typeProperties_url": {
-						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					"AzureSqlDatabase1_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]"
 					},
-					"RestService2_properties_typeProperties_url": {
-						"value": "[parameters('RestService2_properties_typeProperties_url')]"
+					"AzureSqlDatabase1_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -188,9 +216,6 @@
 					"SqlServer_password": {
 						"value": "[parameters('SqlServer_password')]"
 					},
-					"linkedservice_sqlserver_password": {
-						"value": "[parameters('linkedservice_sqlserver_password')]"
-					},
 					"SqlServer_properties_typeProperties_server": {
 						"value": "[parameters('SqlServer_properties_typeProperties_server')]"
 					},
@@ -208,15 +233,6 @@
 					},
 					"SqlServer2_properties_typeProperties_userName": {
 						"value": "[parameters('SqlServer2_properties_typeProperties_userName')]"
-					},
-					"linkedservice_sqlserver_properties_typeProperties_server": {
-						"value": "[parameters('linkedservice_sqlserver_properties_typeProperties_server')]"
-					},
-					"linkedservice_sqlserver_properties_typeProperties_database": {
-						"value": "[parameters('linkedservice_sqlserver_properties_typeProperties_database')]"
-					},
-					"linkedservice_sqlserver_properties_typeProperties_userName": {
-						"value": "[parameters('linkedservice_sqlserver_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -237,6 +253,18 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"linkedservice_sqlserver_password": {
+						"value": "[parameters('linkedservice_sqlserver_password')]"
+					},
+					"linkedservice_sqlserver_properties_typeProperties_server": {
+						"value": "[parameters('linkedservice_sqlserver_properties_typeProperties_server')]"
+					},
+					"linkedservice_sqlserver_properties_typeProperties_database": {
+						"value": "[parameters('linkedservice_sqlserver_properties_typeProperties_database')]"
+					},
+					"linkedservice_sqlserver_properties_typeProperties_userName": {
+						"value": "[parameters('linkedservice_sqlserver_properties_typeProperties_userName')]"
 					}
 				}
 			},

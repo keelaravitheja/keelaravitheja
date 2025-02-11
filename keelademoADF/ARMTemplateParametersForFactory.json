@@ -8,6 +8,9 @@
 		"AzureBlobStorage1_connectionString": {
 			"value": ""
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
 		"SQL Storage_connectionString": {
 			"value": ""
 		},
@@ -20,8 +23,17 @@
 		"linkedservicestoragedemo keela_connectionString": {
 			"value": ""
 		},
-		"AzureDataLakeStorage1_accountKey": {
+		"AzureSqlDatabase1_password": {
 			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://adlskeelademo.dfs.core.windows.net/"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"value": "https://pokeapi.co/api/v2/pokemon?offset=20&limit=20%22"
+		},
+		"RestService2_properties_typeProperties_url": {
+			"value": "https://pokeapi.co/api/v2/pokemon?limit=20&offset={offset}"
 		},
 		"SqlServer_properties_typeProperties_server": {
 			"value": "DESKTOP-069SH83\\KEELA"
@@ -71,14 +83,14 @@
 		"eventtrigger_properties_typeProperties_scope": {
 			"value": "/subscriptions/1268a189-3299-49db-a72f-4e9cd85d409a/resourceGroups/keela_Testenvironment/providers/Microsoft.Storage/storageAccounts/storagedemokeela"
 		},
-		"RestService1_properties_typeProperties_url": {
-			"value": "https://pokeapi.co/api/v2/pokemon?offset=20&limit=20%22"
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "keelasqldatabase.database.windows.net"
 		},
-		"AzureDataLakeStorage1_properties_typeProperties_url": {
-			"value": "https://adlskeelademo.dfs.core.windows.net/"
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "Azure demo"
 		},
-		"RestService2_properties_typeProperties_url": {
-			"value": "https://pokeapi.co/api/v2/pokemon?limit=20&offset={offset}"
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "keelasqlserverdemo"
 		}
 	}
 }
