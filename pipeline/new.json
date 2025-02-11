@@ -1,0 +1,35 @@
+{
+	"name": "new",
+	"properties": {
+		"activities": [
+			{
+				"name": "CDC_df",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "CDC_df",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine",
+					"continuationSettings": {
+						"customizedCheckpointKey": "221092ac-90e4-4e74-a9be-45929c910b9f"
+					}
+				}
+			}
+		],
+		"annotations": []
+	}
+}
